@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AQI Predictor</title>
+    <link rel="stylesheet" href="/templates/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>AQI Prediction System</h2>
+
+        <form id="predictForm" class="form-card">
+
+            <div class="form-group">
+                <label>City</label>
+                <select id="City">
+                    <option>Bangalore</option>
+                    <option>Delhi</option>
+                    <option>Hyderabad</option>
+                    <option>Mumbai</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" id="Date">
+            </div>
+
+            <div class="form-group">
+                <label>PM2.5</label>
+                <input type="number" id="PM25" step="0.1" value="50">
+            </div>
+
+            <div class="form-group">
+                <label>PM10</label>
+                <input type="number" id="PM10" step="0.1" value="100">
+            </div>
+
+            <div class="form-group">
+                <label>NO₂</label>
+                <input type="number" id="NO2" step="0.1" value="50">
+            </div>
+
+            <div class="form-group">
+                <label>SO₂</label>
+                <input type="number" id="SO2" step="0.1" value="50">
+            </div>
+
+            <div class="form-group">
+                <label>CO</label>
+                <input type="number" id="CO" step="0.01" value="1.0">
+            </div>
+
+            <div class="form-group">
+                <label>O₃</label>
+                <input type="number" id="O3" step="0.1" value="50">
+            </div>
+
+            <button type="button" class="btn" onclick="callAPI()">Predict AQI</button>
+        </form>
+
+        <h3 id="result" class="result"></h3>
+    </div>
+
+
+<script>
+async function callAPI() {
+  const payload = {
+    City: document.getElementById('City').value,
+    Date: document.getElementById('Date').value,
+    'PM2.5': parseFloat(document.getElementById('PM25').value) || 0,
+    'PM10': parseFloat(document.getElementById('PM10').value) || 0,
+    'NO2': parseFloat(document.getElementById('NO2').value) || 0,
+    'SO2': parseFloat(document.getElementById('SO2').value) || 0,
+    'CO': parseFloat(document.getElementById('CO').value) || 0,
+    'O3': parseFloat(document.getElementById('O3').value) || 0
+  };
+
+  const resultEl = document.getElementById('result');
+  resultEl.innerText = "Predicting...";
+
+  try {
+    const res = await fetch('/predict', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      resultEl.innerHTML = `<span class="badge">Predicted AQI: ${data.predicted_AQI.toFixed(2)}</span>`;
+    } else {
+      resultEl.innerText = JSON.stringify(data);
+    }
+
+  } catch (e) {
+    resultEl.innerText = "Error: " + e;
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+/* ======== GLOBAL STYLING ======== */
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #e2e8f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ======== MAIN CONTAINER ======== */
+.container {
+    margin: 30px 0 30px 0;
+    width: 80%;
+    max-width: 450px;
+    padding: 30px;
+    background: #1e293b;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    text-align: center;
+}
+
+.container h2 {
+    margin-bottom: 20px;
+    color: #38bdf8;
+}
+
+/* ======== FORM ======== */
+.form-card {
+    display: grid;
+    gap: 15px;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    background: #334155;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+}
+
+/* ======== BUTTON ======== */
+.btn {
+    width: 100%;
+    background: #0ea5e9;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    background: #0284c7;
+}
+
+/* ======== RESULT BADGE ======== */
+.result {
+    margin-top: 20px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #10b981;
+    color: white;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
